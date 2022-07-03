@@ -23,7 +23,7 @@ services:
       - DISABLE_INSTALL_DEMO_CONFIG=true
       - node.store.allow_mmap=false
       - cluster.name=opensearch
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:2.0.1
     container_name: opensearch-dashboards
