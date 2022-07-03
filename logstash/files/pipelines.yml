@@ -5,6 +5,6 @@
   pipeline.ecs_compatibility: disabled
   pipeline.ordered: false
   queue.type: memory
-  path.config: "/root/pipelines"
+  path.config: "/usr/share/logstash/pipelines"
   config.reload.automatic: true
   config.reload.interval: 3s

@@ -4,15 +4,28 @@ services:
   logstash:
     container_name: logstash
     hostname: logstash
-    ports:
-      - "9600:9600"
-    environment:
-      LS_JAVA_OPTS: "-Xmx8g -Xms8g"
-    build:
-      context: ./logstash
+    image: docker.elastic.co/logstash/logstash:7.17.5
     volumes:
-      - ${PWD}/logstash/logstash.sh:/root/entrypoint.sh:ro
-      - ${PWD}/logstash/files/logstash.yml:/root/config/logstash.yml:ro
-      - ${PWD}/logstash/files/pipelines.yml:/root/config/pipelines.yml:ro
-      - ${PWD}/logstash/files/pipelines:/root/pipelines:ro
-      - ${PWD}/logstash/files/server.log:/root/server.log:ro
+      - ${PWD}/logstash/files/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ${PWD}/logstash/files/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
+      - ${PWD}/logstash/files/pipelines:/usr/share/logstash/pipelines:ro
+      - ${PWD}/logstash/files/server.log:/tmp/server.log:ro
+  opensearch:
+    container_name: opensearch
+    hostname: opensearch
+    image: opensearchproject/opensearch:2.0.1
+    environment:
+      - discovery.type=single-node
+      - DISABLE_SECURITY_PLUGIN=true
+      - DISABLE_INSTALL_DEMO_CONFIG=true
+      - node.store.allow_mmap=false
+      - cluster.name=opensearch
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2.0.1
+    container_name: opensearch-dashboards
+    ports:
+      - 5601:5601
+    environment:
+      OPENSEARCH_HOSTS: '["http://opensearch:9200"]'
+      DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
