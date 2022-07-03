@@ -5,6 +5,8 @@ services:
     container_name: logstash
     hostname: logstash
     image: docker.elastic.co/logstash/logstash:7.17.5
+    command:
+      - --config.reload.automatic
     volumes:
       - ${PWD}/logstash/files/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ${PWD}/logstash/files/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
