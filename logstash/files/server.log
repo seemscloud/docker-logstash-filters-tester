@@ -1,2 +1,1 @@
-{"Insights":{"ASIA10001":{"Bar":"Bbb","Foo":"Aaa"}}}
-{"Insights":{"ASIA10001":{"Bar":"Bbb","Foo":"Aaa"}}}
+{ "Insights": { "ASIA10001": { "Foo": { "Bar": { "Baz": "Mar" } } } } }
