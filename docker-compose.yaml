@@ -4,7 +4,8 @@ services:
   logstash:
     container_name: logstash
     hostname: logstash
-    image: docker.elastic.co/logstash/logstash:7.17.5
+    build:
+      context: ./logstash
     command:
       - --config.reload.automatic
     volumes:
